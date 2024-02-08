@@ -4,7 +4,7 @@ from random import randint
 import copy
 from threading import Thread
 
-etherlight = Etherlight("192.168.1.254")
+etherlight = Etherlight("10.0.10.6")
 
 FIELD_LENGTH = 24
 

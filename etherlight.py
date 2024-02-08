@@ -48,7 +48,10 @@ class Etherlight:
         print(self.proc.stdout)
 
     def set_led_values(self, led, r, g, b, a=100):
-        command = f'echo "{led} {hex(r)[2:]} {hex(g)[2:]} {hex(b)[2:]} {a}" > /proc/led/led_code'
+        # command = f'echo "{led} {hex(r)[2:]} {hex(g)[2:]} {hex(b)[2:]} {a}" > /proc/led/led_code'
+        command = f'echo "{led} r {r*100}" > /proc/led/led_color\n'
+        command += f'echo "{led} g {g*100}" > /proc/led/led_color\n'
+        command += f'echo "{led} b {b*100}" > /proc/led/led_color\n'
         self.write_command(command)
 
     def set_led_color(self, led, color, a=100):
