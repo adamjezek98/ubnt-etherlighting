@@ -38,14 +38,14 @@ class Etherlight:
         self.led_cache = []
 
     def write_command(self, command, flush=False):
-        print(command)
+        # print(command)
         self.proc.stdin.write(f"{command}\n")
         if flush:
             self.proc.stdin.flush()
 
     def flush(self):
         self.proc.stdin.flush()
-        print(self.proc.stdout)
+        # print(self.proc.stdout)
 
     def set_led_values(self, led, r, g, b, a=100):
         # command = f'echo "{led} {hex(r)[2:]} {hex(g)[2:]} {hex(b)[2:]} {a}" > /proc/led/led_code'
