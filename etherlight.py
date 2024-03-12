@@ -1,3 +1,4 @@
+import os
 from subprocess import Popen, PIPE
 import shlex
 
@@ -33,7 +34,12 @@ import shlex
 class Etherlight:
     def __init__(self, ip):
         self.ip = ip
-        self.proc = Popen(shlex.split(f"ssh {ip}"), stdin=PIPE, universal_newlines=True)
+        user_name = os.getenv("SWITCH_USER")
+        user_pswd = os.getenv("SWITCH_PSWD")
+        if user_name:
+            self.proc = Popen(shlex.split(f"sshpass -p {user_pswd} ssh -o StrictHostKeyChecking=no {user_name}@{ip}"), stdin=PIPE, universal_newlines=True)
+        else:
+            self.proc = Popen(shlex.split(f"ssh {ip}"), stdin=PIPE, universal_newlines=True)
         self.write_command('echo "0" > /proc/led/led_mode', True)
         self.led_cache = []
 
